@@ -1,12 +1,16 @@
 import React from 'react';
 import Navbar from '../../navbar/navbar';
+import Board from './squeare';
 
 const TicTac = () => (
-  <div>
+  <div >
     <Navbar />
-    <h2>Tictac test</h2>
-    
+    <div className='center-container'>
+      <h2>Tictac test</h2>
+      <Board />
+    </div>
   </div>
 );
 
 export default TicTac;
+

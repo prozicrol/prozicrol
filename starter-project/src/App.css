@@ -40,3 +40,8 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.center-container {
+    margin: auto;
+    width: 50%;
+}

@@ -1,14 +1,16 @@
 import React from "react";
 import './navbar.css';
 import {Link} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserAlt } from '@fortawesome/free-solid-svg-icons'
 
 export default function Navbar(){
     return (
         <nav className="navbar">
         <div className="navbar-left">
-            <a href="/" className="logo">
+            <Link to="/" className="logo">
             Testing
-            </a>
+            </Link>
         </div>
         <div className="navbar-center">
             <ul className="nav-links">
@@ -21,13 +23,9 @@ export default function Navbar(){
             </ul>
         </div>
         <div className="navbar-right">
-            <a href="/cart" className="cart-icon">
-            <i className="fas fa-shopping-cart"></i>
-            <span className="cart-count">0</span>
-            </a>
-            <a href="/account" className="user-icon">
-            <i className="fas fa-user"></i>
-            </a>
+            <Link to="/" style={{color:'white'}}>
+            <FontAwesomeIcon icon={faUserAlt} />
+            </Link>
         </div>
         </nav>
     )
