@@ -24,6 +24,7 @@ export default function Board() {
 
     const winner = calculateWinner(squares);
     let status = winner ? `Winner: ${winner}` : `Next player: ${is_next ? "X" : "O"}`;
+    status = !winner && !squares.some(e => e == null) ? 'Draw' : status
 
     return (
         <>
