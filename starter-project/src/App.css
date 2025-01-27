@@ -42,6 +42,11 @@ body {
 }
 
 .center-container {
-    margin: auto;
-    width: 50%;
+  margin: auto;
+  width: 50%;
+}
+
+.center-container-tic-tac {
+  margin: auto;
+  width: 20%;
 }

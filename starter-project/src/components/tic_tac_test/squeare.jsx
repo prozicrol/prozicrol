@@ -1,52 +1,88 @@
 import {useState} from 'react'
-import './squeare.css'
-
+import CoolButton from '../button'
 
 function Square({value, onSquareClick }) {
     return <button className="square" onClick={onSquareClick}>{value}</button>;
   }
 
-export default function Board() {
-    const [squares, set_squares] = useState(Array(9).fill(null))
-    const [is_next, set_next] = useState(true);
+function Board({ xIsNext, squares, onPlay }) {
 
     function handleClick(i) {
         if (squares[i] || calculateWinner(squares)) return;
         const nextSquares = squares.slice();
-        nextSquares[i] = is_next ? 'X' : 'O';
-        set_next(!is_next);
-        set_squares(nextSquares);
-    }
-
-    function ReloadGame(){
-        set_squares(Array(9).fill(null));
+        nextSquares[i] = xIsNext ? 'X' : 'O';
+        onPlay(nextSquares);
     }
 
     const winner = calculateWinner(squares);
-    let status = winner ? `Winner: ${winner}` : `Next player: ${is_next ? "X" : "O"}`;
+    let status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? "X" : "O"}`;
     status = !winner && !squares.some(e => e == null) ? 'Draw' : status
+
+    function drawBoard(){
+      let table = [];
+      for (let i = 0; i < 3; i++) {
+        let row = [];
+        for (let y = 0; y < 3; y++) {
+          row.push(<Square value={squares[y + i * 3]} onSquareClick={() => handleClick(y + i * 3)} />)
+          
+        }
+        table.push(<div className="board-row">{row}</div>)
+      }
+      return table;
+    }
 
     return (
         <>
             <div className="status">{status}</div>
-            <button className="status" onClick={ReloadGame}>Reload</button>
-            <div className="board-row">
-                <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-                <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-                <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-            </div>
-            <div className="board-row">
-                <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-                <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-                <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-            </div>
-            <div className="board-row">
-                <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-                <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-                <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-            </div>
+            {drawBoard()}
         </>
       );
+}
+
+export default function Game() {
+
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [currentMove, setCurrentMove] = useState(0);
+  const xIsNext = currentMove % 2 === 0;
+  const currentSquares = history[currentMove];
+
+
+  function handlePlay(nextSquares) {
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
+  }
+
+  function ReloadGame(){
+    setCurrentMove(0);
+  }
+
+  function jumpTo(nextMove) {
+    setCurrentMove(nextMove);
+  }
+
+  const moves = history.map((squares, move)=>{
+    return (
+      <li key={move}>
+        {move > 0 ? ( <button onClick={() => jumpTo(move)}>{`Go to move # ${move}`}</button> ) : ( <span>Go to game start</span> )}
+      </li>
+    );
+
+  })
+
+
+
+  return (
+    <div className='game'>
+      <div className='game.board'>
+          <CoolButton clickEvent={ReloadGame} text='Reload' />
+          <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+      </div>
+      <div className='game-info'>
+        <ol>{moves}</ol>
+      </div>
+    </div>
+  )
 }
 
 function calculateWinner(squares) {
