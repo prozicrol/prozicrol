@@ -1,11 +1,11 @@
-import React from 'react';
 import Navbar from '../../navbar/navbar';
+import DataComponent from '../../APIrequest/requests'
 
 const Test2 = () => (
   <div>
     <Navbar />
-    <h2>About</h2>
-    This example shows how to use Test_2 router
+    <h2>API test</h2>
+    <DataComponent />
   </div>
 );
 

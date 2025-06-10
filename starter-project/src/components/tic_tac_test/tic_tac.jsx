@@ -1,4 +1,3 @@
-import React from 'react';
 import Navbar from '../../navbar/navbar';
 import Game from './squeare';
 import './squeare.css'

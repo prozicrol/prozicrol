@@ -8,7 +8,7 @@ In the project directory, you can run:
 
 ### `npm run deploy`
 
-Deploy to gh-pages
+Deploy to gh-pages / GITHUB PAGES
 
 ### `npm start`
 

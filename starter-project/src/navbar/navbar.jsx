@@ -18,7 +18,10 @@ export default function Navbar(){
                 <Link to="/ticTac">Test 1: Tictac</Link>
             </li>
             <li>
-                <Link to="/test_2">Test 2</Link>
+                <Link to="/test_2">Test 2: ApiFetch</Link>
+            </li>
+            <li>
+                <a href="/prozicrol/solitaire">Test 3: Phaser3</a>
             </li>
             </ul>
         </div>
