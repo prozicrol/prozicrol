@@ -23,6 +23,12 @@ export default function Navbar(){
             <li>
                 <a href="/prozicrol/solitaire">Test 3: Phaser3</a>
             </li>
+            <li>
+                <Link to="/dig_game">Super Dig Game</Link>
+            </li>
+            <li>
+                <Link to="/user">User</Link>
+            </li>
             </ul>
         </div>
         <div className="navbar-right">

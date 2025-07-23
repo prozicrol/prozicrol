@@ -29,6 +29,11 @@
     color: #fff;
     text-decoration: none;
   }
+
+  .navbar-center .nav-links a:hover {
+    color: #c9c9c9;
+  }
+
   
   .navbar-right {
     display: flex;
